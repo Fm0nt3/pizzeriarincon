@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte - Pizzería Rincón</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Cherry+Bomb+One&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-brown: #5D3A1A;
+            --accent-red: #D32F2F;
+            --bg-cream: #FFF8E1;
+            --card-bg: #F5E6CA;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--primary-brown);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Pattern a scacchi tipico delle pizzerie */
+        .header-pattern {
+            width: 100%;
+            height: 20px;
+            background-image: linear-gradient(45deg, var(--accent-red) 25%, transparent 25%), 
+                              linear-gradient(-45deg, var(--accent-red) 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, var(--accent-red) 75%), 
+                              linear-gradient(-45deg, transparent 75%, var(--accent-red) 75%);
+            background-size: 20px 20px;
+            background-color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+            filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+        }
+
+        h1 {
+            font-family: 'Cherry Bomb One', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-brown);
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        /* Bottoni Opzioni */
+        .options-grid {
+            display: grid;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 4px solid var(--primary-brown);
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bungee', cursive;
+            font-size: 1.1rem;
+            box-shadow: 0px 6px 0px var(--primary-brown);
+        }
+
+        .option-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 9px 0px var(--primary-brown);
+            background-color: #fcebc9;
+        }
+
+        .option-card:active {
+            transform: translateY(3px);
+            box-shadow: 0px 2px 0px var(--primary-brown);
+        }
+
+        /* Overlay per le procedure */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 80%;
+            border: 5px solid var(--accent-red);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-pattern"></div>
+
+    <div class="container">
+        <img src="logo_pizzeria.png" alt="Pizzería Rincón Logo" class="logo">
+        
+        <h1>¿Necesitas ayuda?</h1>
+        <p class="subtitle">Selecciona el problema que estás teniendo y te guiaremos paso a paso.</p>
+
+        <div class="options-grid">
+            <div class="option-card" onclick="openModal('reserva')">
+                ⚠️ PROBLEMAS CON LA RESERVA
+            </div>
+            <div class="option-card" onclick="openModal('pedido')">
+                🍕 MI PIZZA NO LLEGA / ERROR
+            </div>
+            <div class="option-card" onclick="openModal('pago')">
+                💳 PROBLEMAS CON EL PAGO
+            </div>
+            <div class="option-card" onclick="openModal('otros')">
+                ❓ OTRAS CONSULTAS
+            </div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Pizzería Rincón - Centro de Soporte
+    </footer>
+
+    <script>
+        function openModal(type) {
+            const modal = document.getElementById('infoModal');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+
+            modal.style.display = "flex";
+
+            if(type === 'reserva') {
+                title.innerText = "Problemas con la Reserva";
+                body.innerHTML = "<p>Aquí va el procedimiento para las reservas...</p><ul><li>Paso 1...</li><li>Paso 2...</li></ul>";
+            } else if(type === 'pedido') {
+                title.innerText = "Estado del Pedido";
+                body.innerHTML = "<p>Si tu pizza se retrasa, por favor verifica el tracking o llama al local directamente.</p>";
+            } else if(type === 'pago') {
+                title.innerText = "Problemas de Pago";
+                body.innerHTML = "<p>Instrucciones para errores con tarjeta o reembolsos.</p>";
+            } else {
+                title.innerText = "Otras Consultas";
+                body.innerHTML = "<p>Contáctanos al WhatsApp: +34 XXX XXX XXX</p>";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = "none";
+        }
+
+        // Chiudi se clicchi fuori dal box
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('infoModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
