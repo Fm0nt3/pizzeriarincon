@@ -216,17 +216,17 @@
             modal.style.display = "flex";
 
             if(type === 'reserva') {
-                title.innerText = "Problemas con la Reserva";
-                body.innerHTML = "<p>Aquí va el procedimiento para las reservas...</p><ul><li>Paso 1...</li><li>Paso 2...</li></ul>";
+                title.innerText = "Cómo reservar";
+                body.innerHTML = "<p>Para reservar, puedes usar nuestro número de teléfono dedicado o hacerlo directamente a través de la web.</p>";
             } else if(type === 'pedido') {
                 title.innerText = "Estado del Pedido";
-                body.innerHTML = "<p>Si tu pizza se retrasa, por favor verifica el tracking o llama al local directamente.</p>";
+                body.innerHTML = "<p>Si las pizzas aún no han llegado, sigue este procedimiento: junto con tu pedido deberías haber recibido un sobre con una estrella, ábrelo y sigue las instrucciones.</p>";
             } else if(type === 'pago') {
                 title.innerText = "Problemas de Pago";
-                body.innerHTML = "<p>Instrucciones para errores con tarjeta o reembolsos.</p>";
+                body.innerHTML = "<p>Si tienes problemas con el pago, acude a la pizzería en persona o paga directamente al repartidor.</p>";
             } else {
                 title.innerText = "Otras Consultas";
-                body.innerHTML = "<p>Contáctanos al WhatsApp: +34 XXX XXX XXX</p>";
+                body.innerHTML = "<p>¡¡Escríbenos en nuestras redes sociales!!</p>";
             }
         }
 
