@@ -107,6 +107,26 @@
             box-shadow: 0px 2px 0px var(--primary-brown);
         }
 
+        /* Stile per le immagini decorative "volanti" */
+        .decor-img {
+            position: absolute;
+            z-index: -1; /* Restano dietro ai bottoni e al testo */
+            filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.1)); /* Ombra stile cartoon */
+            pointer-events: none; /* Così non danno fastidio se ci clicchi sopra per sbaglio */
+            user-select: none;
+        }
+
+        /* Esempio di posizioni diverse (puoi crearne quante ne vuoi) */
+        .pos-1 { top: 15%; left: 5%; width: 120px; transform: rotate(-15deg); }
+        .pos-2 { top: 20%; right: 8%; width: 100px; transform: rotate(10deg); }
+        .pos-3 { bottom: 15%; left: 10%; width: 130px; transform: rotate(5deg); }
+        .pos-4 { bottom: 25%; right: 5%; width: 110px; transform: rotate(-20deg); }
+
+        /* Nascondile su cellulare se lo schermo è troppo piccolo per non coprire tutto */
+        @media (max-width: 768px) {
+            .decor-img { display: none; }
+        }
+
         /* Overlay per le procedure */
         .modal {
             display: none;
@@ -144,7 +164,10 @@
     </style>
 </head>
 <body>
-
+    <img src="burger.PNG" class="decor-img pos-1" alt="decor">
+    <img src="nacho.PNG" class="decor-img pos-2" alt="decor">
+    <img src="bibita.PNG" class="decor-img pos-3" alt="decor">
+    <img src="patatine.PNG" class="decor-img pos-4" alt="decor">
     <div class="header-pattern"></div>
 
     <div class="container">
